@@ -75,7 +75,7 @@ userSchema.methods.toJSON = function () {
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this
-    const token = jwt.sign({ _id: user.id.toString() }, 'nodecourse',
+    const token = jwt.sign({ _id: user.id.toString() }, process.env.SECRET,
         { expiresIn: '1h' })
 
     user.tokens = user.tokens.concat({ token })
