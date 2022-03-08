@@ -105,9 +105,10 @@ router.delete('/users/me/avatar', auth, async (req, res) => {
     await req.user.save()
     res.send()
 })
-router.get('/users/:id/avatar', async (req, res) => {
+router.get('/users/avatar', auth, async (req, res) => {
+
     try {
-        const user = await User.findById(req.params.id)
+        const user = await User.findById(req.user.id)
         if (!user || !user.avatar) {
             throw new Error()
         }
